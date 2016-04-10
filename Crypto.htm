@@ -735,6 +735,18 @@
 			return crc ^ (-1);
 	};
 
+	/**
+	*
+	*	Javascript rot13
+	*	http://www.phpjs.org/
+	*
+	**/
+	function rot13 (str) {
+		return (str + '').replace(/[a-z]/gi, function (s) {
+				return String.fromCharCode(s.charCodeAt(0) + (s.toLowerCase() < 'n' ? 13 : -13))
+			})
+	}
+
 	function crypto() {
 		var text = document.getElementById('input_textarea').value;
 		document.getElementById("md5").value = MD5(text);
@@ -745,6 +757,7 @@
 		document.getElementById("urldecode").value = Url.decode(text);
 		document.getElementById("base64encode").value = Base64.encode(text);
 		document.getElementById("base64decode").value = Base64.decode(text);
+		document.getElementById("rot13").value = rot13(text);
 	}
 </script>
 
@@ -820,6 +833,15 @@
 			<input id="base64decode" type="text" readonly value="" onmouseout="this.select()"
 				onmouseover="this.select()" onfocus="this.select()" size="35">
 			<a href="#" onclick="send_to_textarea(document.getElementById('base64decode').value)">[Send to input]</a>
+		</td>
+	</tr>
+	<tr>
+		<td>String:</td>
+		<td>ROT13:</td>
+		<td>
+			<input id="rot13" type="text" readonly value="" onmouseout="this.select()"
+				onmouseover="this.select()" onfocus="this.select()" size="35">
+			<a href="#" onclick="send_to_textarea(document.getElementById('rot13').value)">[Send to input]</a>
 		</td>
 	</tr>
 </table>
